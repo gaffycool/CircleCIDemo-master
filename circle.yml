@@ -30,6 +30,12 @@ dependencies:
         # Force Gradle to pre-download dependencies for the app module (the default would only be for the root, which is useless)
         - if [ -f ./gradlew ]; then ./gradlew app:dependencies --console=plain --no-daemon;else gradle app:dependencies --console=plain --no-daemon;fi
 
+
+dependencies:
+override:
+- echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+- chmod +x gradlew
+- ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
     cache_directories:
         # Android SDK
         - /usr/local/android-sdk-linux/tools
